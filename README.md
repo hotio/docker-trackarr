@@ -28,7 +28,7 @@ The environment variables below are all optional, the values you see are the def
 | ---------|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | latest   | The same as `stable`           |                                                                                                                                                             |                                                                                                          |
 | stable   | Stable version                 | [![Build Status](https://cloud.drone.io/api/badges/hotio/docker-trackarr/status.svg?ref=refs/heads/stable)](https://cloud.drone.io/hotio/docker-trackarr)   | ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-trackarr/stable)   |
-| unstable | Unstable dev versions          | [![Build Status](https://cloud.drone.io/api/badges/hotio/docker-trackarr/status.svg?ref=refs/heads/unstable)](https://cloud.drone.io/hotio/docker-trackarr) | ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-trackarr/unstable) |
+| unstable | Unstable version, -dev release | [![Build Status](https://cloud.drone.io/api/badges/hotio/docker-trackarr/status.svg?ref=refs/heads/unstable)](https://cloud.drone.io/hotio/docker-trackarr) | ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-trackarr/unstable) |
 
 You can also find tags that reference a commit or version number.
 
