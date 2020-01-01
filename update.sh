@@ -22,3 +22,4 @@ else
     sed -i "s/{TAG_VERSION=.*}$/{TAG_VERSION=${version}}/g" .drone.yml
     echo "##[set-output name=version;]${version}"
 fi
+
