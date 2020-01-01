@@ -9,7 +9,7 @@
 Just the basics to get the container running:
 
 ```shell
-docker run --rm --name trackarr -v /<host_folder_config>:/config hotio/trackarr
+docker run --rm --name trackarr -p 7337:7337 -v /<host_folder_config>:/config hotio/trackarr
 ```
 
 The environment variables below are all optional, the values you see are the defaults.
@@ -23,10 +23,11 @@ The environment variables below are all optional, the values you see are the def
 
 ## Tags
 
-| Tag      | Description                    | Build Status                                                                                                                                              | Last Updated                                                                                           |
-| ---------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| latest   | The same as `stable`           |                                                                                                                                                           |                                                                                                        |
-| stable   | Stable version                 | [![Build Status](https://cloud.drone.io/api/badges/hotio/docker-trackarr/status.svg?ref=refs/heads/stable)](https://cloud.drone.io/hotio/docker-trackarr) | ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-trackarr/stable) |
+| Tag      | Description                    | Build Status                                                                                                                                                | Last Updated                                                                                             |
+| ---------|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| latest   | The same as `stable`           |                                                                                                                                                             |                                                                                                          |
+| stable   | Stable version                 | [![Build Status](https://cloud.drone.io/api/badges/hotio/docker-trackarr/status.svg?ref=refs/heads/stable)](https://cloud.drone.io/hotio/docker-trackarr)   | ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-trackarr/stable)   |
+| unstable | Unstable dev versions          | [![Build Status](https://cloud.drone.io/api/badges/hotio/docker-trackarr/status.svg?ref=refs/heads/unstable)](https://cloud.drone.io/hotio/docker-trackarr) | ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-trackarr/unstable) |
 
 You can also find tags that reference a commit or version number.
 
