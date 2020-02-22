@@ -1,10 +1,10 @@
-FROM hotio/base@sha256:ae471f9d08cf51928f92ed403a1d571fd3fc24f2771d58403e9963ef82205ba1
+FROM hotio/base@sha256:039214e09dba0974ad79ac56e166b943503c09179a4743865928392addcb1f2a
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
 EXPOSE 7337
 
-ARG TRACKARR_URL=https://gitlab.com/cloudb0x/trackarr/uploads/f79165c7eec923910a36f219d3adaad0/trackarr_v1.3.0-dev_linux_amd64.tar.gz
+ARG TRACKARR_URL=https://gitlab.com/cloudb0x/trackarr/uploads/baaaeaee58ef487e065fb6d4a1abd028/trackarr_v1.4.1_linux_amd64.tar.gz
 
 # install trackarr
 RUN curl -fsSL "${TRACKARR_URL}" | tar xzf - -C "${APP_DIR}" && \
