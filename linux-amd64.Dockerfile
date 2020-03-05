@@ -4,7 +4,7 @@ ARG DEBIAN_FRONTEND="noninteractive"
 
 EXPOSE 7337
 
-ARG TRACKARR_URL=https://gitlab.com/cloudb0x/trackarr/uploads/388395c2c9de3971418fc5e4cb2dd04f/trackarr_v1.4.2-dev_linux_amd64.tar.gz
+ARG TRACKARR_URL=https://gitlab.com/cloudb0x/trackarr/uploads/d7ce9204ab234fb802333b0852fbcc12/trackarr_v1.5.0-dev_linux_amd64.tar.gz
 
 # install trackarr
 RUN curl -fsSL "${TRACKARR_URL}" | tar xzf - -C "${APP_DIR}" && \
