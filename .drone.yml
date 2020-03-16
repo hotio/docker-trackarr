@@ -62,11 +62,18 @@ steps:
   pull: always
   commands:
     - apt list --installed
-- name: show-startup
+- name: test
   image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
   pull: always
   commands:
-    - /app/trackarr
+    - bash update.sh checkservice
+
+services:
+- name: service
+  image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+  pull: always
+  environment:
+    DEBUG: yes
 
 depends_on:
   - linux-amd64
@@ -155,6 +162,16 @@ trigger:
   - failure
 
 steps:
+- name: screenshot
+  image: zenika/alpine-chrome:with-puppeteer
+  pull: always
+  user: root
+  commands:
+    - apk add --no-cache curl@edge iputils@edge bash@edge coreutils@edge
+    - bash update.sh checkservice
+    - bash update.sh screenshot
+  failure: ignore
+
 - name: discord
   image: ${DRONE_REPO_OWNER}/base
   pull: always
@@ -167,6 +184,13 @@ steps:
   commands:
     - curl -fsSL https://gist.githubusercontent.com/hotio/d490b6447ddde9634475ddacbc85d8c1/raw/discord-build-notify.sh > discord-build-notify.sh
     - bash discord-build-notify.sh
+
+services:
+- name: service
+  image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+  pull: always
+  environment:
+    DEBUG: yes
 
 depends_on:
   - manifest
