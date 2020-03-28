@@ -53,6 +53,7 @@ else
     data=$(curl -fsSL https://gitlab.com/api/v4/projects/cloudb0x%2Ftrackarr/releases | jq -r '.[] | select (.name | endswith("-dev") | not)' | jq -s '.[0]')
     version=$(echo "${data}" | jq -r '.name' | sed s/^v//g)
     [[ -z ${version} ]] && exit 1
+    [[ ${version} == null ]] && exit 0
     url_amd64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_amd64")).url')
     # url_arm=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm")).url')
     # url_arm64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm64")).url')
