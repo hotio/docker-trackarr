@@ -6,7 +6,7 @@ WORKDIR /${BINARY}
 
 ARG TRACKARR_VERSION
 
-RUN apt update && apt install yarnpkg && \
+RUN apt update && apt install -y --no-install-recommends --no-install-suggests yarnpkg && \
     git clone -n https://gitlab.com/cloudb0x/trackarr.git . && \
     git checkout ${TRACKARR_VERSION} -b hotio && \
     go get github.com/GeertJohan/go.rice/rice && \
