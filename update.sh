@@ -50,16 +50,8 @@ elif [[ ${1} == "checkdigests" ]]; then
     digest=$(echo "${manifest}" | jq -r '.manifests[] | select (.platform.architecture == "arm" and .platform.os == "linux").digest')   && sed -i "s#FROM .*\$#FROM ${image}@${digest}#g" ./linux-arm.Dockerfile   && echo "${digest}"
     digest=$(echo "${manifest}" | jq -r '.manifests[] | select (.platform.architecture == "arm64" and .platform.os == "linux").digest') && sed -i "s#FROM .*\$#FROM ${image}@${digest}#g" ./linux-arm64.Dockerfile && echo "${digest}"
 else
-    data=$(curl -fsSL https://gitlab.com/api/v4/projects/cloudb0x%2Ftrackarr/releases | jq -r '.[0]')
-    version=$(echo "${data}" | jq -r '.name' | sed s/^v//g)
+    version=$(curl -fsSL https://gitlab.com/api/v4/projects/cloudb0x%2Ftrackarr/repository/commits?ref_name=develop | jq -r '.[0].id')
     [[ -z ${version} ]] && exit 1
-    [[ ${version} == null ]] && exit 0
-    url_amd64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_amd64.tar.gz")).url')
-    url_arm=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm.tar.gz")).url')
-    url_arm64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm64.tar.gz")).url')
     sed -i "s/{TRACKARR_VERSION=[^}]*}/{TRACKARR_VERSION=${version}}/g" .drone.yml
-    sed -i "s#{TRACKARR_URL_AMD64=[^}]*}#{TRACKARR_URL_AMD64=${url_amd64}}#g" .drone.yml
-    sed -i "s#{TRACKARR_URL_ARM=[^}]*}#{TRACKARR_URL_ARM=${url_arm}}#g" .drone.yml
-    sed -i "s#{TRACKARR_URL_ARM64=[^}]*}#{TRACKARR_URL_ARM64=${url_arm64}}#g" .drone.yml
     echo "##[set-output name=version;]${version}"
 fi
