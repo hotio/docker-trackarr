@@ -10,9 +10,8 @@ RUN mkdir -p /trackarr && \
     cd /trackarr && \
     git checkout ${TRACKARR_VERSION} -b hotio && \
     go get github.com/GeertJohan/go.rice/rice && \
-    cd /trackarr && \
-    make vendor && \
-    make build
+    GOOS=linux GOARCH=amd64 make vendor && \
+    GOOS=linux GOARCH=amd64 make build
 
 FROM hotio/base@sha256:75b16518487eb5cf1b65f55132938dbee7f954d82b8c13d4b0175780ada14ff7
 
