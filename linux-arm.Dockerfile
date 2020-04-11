@@ -12,7 +12,8 @@ ARG TRACKARR_VERSION
 RUN git clone -n https://gitlab.com/cloudb0x/trackarr.git . && \
     git checkout ${TRACKARR_VERSION} -b hotio && \
     go get github.com/GeertJohan/go.rice/rice && \
-    make
+    make vendor && \
+    make build
 
 FROM hotio/base@sha256:e657aeb562b27964f7f214fe4f2cbccd768703636090972fd013be3709930043
 
