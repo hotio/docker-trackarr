@@ -8,8 +8,11 @@ ARG TRACKARR_VERSION
 RUN mkdir -p /trackarr && \
     git clone -n https://gitlab.com/cloudb0x/trackarr.git /trackarr && \
     cd /trackarr && \
+    ls -l /trackarr && \
     git checkout ${TRACKARR_VERSION} -b hotio && \
+    ls -l /trackarr && \
     go get github.com/GeertJohan/go.rice/rice && \
+    ls -l /trackarr && \
     GOOS=linux GOARCH=amd64 make vendor && \
     GOOS=linux GOARCH=amd64 make build
 
