@@ -1,12 +1,13 @@
-FROM golang:stretch as builder
+FROM golang:buster as builder
 ARG BINARY=trackarr
-
+ARG DEBIAN_FRONTEND="noninteractive"
 RUN mkdir -p /${BINARY}
 WORKDIR /${BINARY}
 
 ARG TRACKARR_VERSION
 
-RUN git clone -n https://gitlab.com/cloudb0x/trackarr.git . && \
+RUN apt update && apt install yarnpkg && \
+    git clone -n https://gitlab.com/cloudb0x/trackarr.git . && \
     git checkout ${TRACKARR_VERSION} -b hotio && \
     go get github.com/GeertJohan/go.rice/rice && \
     make vendor && \
