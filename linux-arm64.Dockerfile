@@ -4,9 +4,8 @@ RUN apt update && apt install -y --no-install-recommends --no-install-suggests y
 
 ARG TRACKARR_VERSION
 
-RUN git clone -n https://gitlab.com/cloudb0x/trackarr.git /trackarr && \
-    cd /trackarr && \
-    git checkout ${TRACKARR_VERSION} -b hotio && \
+RUN git clone -n https://gitlab.com/cloudb0x/trackarr.git /trackarr && cd /trackarr && \
+    git checkout ${TRACKARR_VERSION} && \
     go get github.com/GeertJohan/go.rice/rice && \
     make vendor && \
     make build

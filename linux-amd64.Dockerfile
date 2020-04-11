@@ -1,15 +1,12 @@
 FROM golang:buster as builder
 
-#RUN apt update && apt install -y --no-install-recommends --no-install-suggests yarnpkg
+RUN apt update && apt install -y --no-install-recommends --no-install-suggests yarnpkg
 
 ARG TRACKARR_VERSION
 
 RUN git clone -n https://gitlab.com/cloudb0x/trackarr.git /trackarr && cd /trackarr && \
-    echo ${TRACKARR_VERSION} && \
     git checkout ${TRACKARR_VERSION} && \
-    ls -l /trackarr && \
     go get github.com/GeertJohan/go.rice/rice && \
-    ls -l /trackarr && \
     make vendor && \
     make build
 
