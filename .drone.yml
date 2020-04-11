@@ -312,6 +312,7 @@ steps:
   image: zenika/alpine-chrome:with-puppeteer
   pull: always
   user: root
+  environment:
     VERSION_FIELD: ${TRACKARR_VERSION=1.7.0}
   commands:
     - apk add --no-cache curl@edge iputils@edge bash@edge coreutils@edge
