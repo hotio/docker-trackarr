@@ -10,8 +10,7 @@ RUN apt update && apt install -y --no-install-recommends --no-install-suggests y
     git clone -n https://gitlab.com/cloudb0x/trackarr.git . && \
     git checkout ${TRACKARR_VERSION} -b hotio && \
     go get github.com/GeertJohan/go.rice/rice && \
-    make vendor && \
-    make build
+    make
 
 FROM hotio/base@sha256:e657aeb562b27964f7f214fe4f2cbccd768703636090972fd013be3709930043
 
