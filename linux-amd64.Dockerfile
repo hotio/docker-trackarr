@@ -5,7 +5,7 @@ FROM golang:buster as builder
 ARG TRACKARR_VERSION
 
 RUN git clone -n https://gitlab.com/cloudb0x/trackarr.git /trackarr && cd /trackarr && \
-    ls -l /trackarr && \
+    echo ${TRACKARR_VERSION} && \
     git checkout ${TRACKARR_VERSION} -b hotio && \
     ls -l /trackarr && \
     go get github.com/GeertJohan/go.rice/rice && \
