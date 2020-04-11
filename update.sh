@@ -28,7 +28,7 @@ const puppeteer = require('puppeteer');
   }
   await page.evaluate(() => {
     const div = document.createElement('div');
-    div.innerHTML = 'Image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}<br>Commit: ${DRONE_COMMIT_SHA:0:7}<br>Build: #${DRONE_BUILD_NUMBER}<br>Timestamp: $(date -u --iso-8601=seconds)';
+    div.innerHTML = 'Image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}<br>App Version: ${VERSION_FIELD}<br>Commit: ${DRONE_COMMIT_SHA:0:7}<br>Build: #${DRONE_BUILD_NUMBER}<br>Timestamp: $(date -u --iso-8601=seconds)';
     div.style.cssText = "all: initial !important; border-radius: 4px !important; font-weight: normal !important; font-size: normal !important; font-family: monospace !important; padding: 10px !important; color: black !important; position: fixed !important; bottom: 10px !important; right: 10px !important; background-color: #e7f3fe !important; border-left: 6px solid #2196F3 !important; z-index: 10000 !important";
     document.body.appendChild(div);
   });
@@ -55,11 +55,11 @@ else
     [[ -z ${version} ]] && exit 1
     [[ ${version} == null ]] && exit 0
     url_amd64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_amd64")).url')
-    # url_arm=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm")).url')
-    # url_arm64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm64")).url')
-    sed -i "s#ARG TRACKARR_URL=.*\$#ARG TRACKARR_URL=${url_amd64}#g" linux-amd64.Dockerfile
-    # sed -i "s#ARG TRACKARR_URL=.*\$#ARG TRACKARR_URL=${url_arm}#g" linux-arm.Dockerfile
-    # sed -i "s#ARG TRACKARR_URL=.*\$#ARG TRACKARR_URL=${url_arm64}#g" linux-arm64.Dockerfile
-    sed -i "s/{TAG_VERSION=.*}$/{TAG_VERSION=${version}}/g" .drone.yml
+    #url_arm=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm")).url')
+    #url_arm64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm64")).url')
+    sed -i "s/{TRACKARR_VERSION=[^}]*}/{TRACKARR_VERSION=${version}}/g" .drone.yml
+    sed -i "s#{TRACKARR_URL_AMD64=[^}]*}#{TRACKARR_URL_AMD64=${url_amd64}}#g" .drone.yml
+    sed -i "s#{TRACKARR_URL_ARM=[^}]*}#{TRACKARR_URL_ARM=${url_arm}}#g" .drone.yml
+    sed -i "s#{TRACKARR_URL_ARM64=[^}]*}#{TRACKARR_URL_ARM64=${url_arm64}}#g" .drone.yml
     echo "##[set-output name=version;]${version}"
 fi

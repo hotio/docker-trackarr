@@ -40,6 +40,8 @@ steps:
     dockerfile: ${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}.Dockerfile
     tags:
       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+    build_args:
+      - TRACKARR_URL=${TRACKARR_URL_AMD64=https://gitlab.com/cloudb0x/trackarr/uploads/00d2ec2dc2c7472d1cd4bedc9f4190f2/trackarr_v1.7.0_linux_amd64.tar.gz}
 
 depends_on:
   - checks
@@ -78,6 +80,138 @@ services:
 depends_on:
   - linux-amd64
 
+# ---
+# kind: pipeline
+# name: linux-arm64
+
+# platform:
+#   os: linux
+#   arch: arm64
+
+# trigger:
+#   event:
+#     - push
+
+# steps:
+# - name: build
+#   image: plugins/docker
+#   pull: always
+#   settings:
+#     username:
+#       from_secret: docker_username
+#     password:
+#       from_secret: docker_password
+#     repo: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}
+#     cache_from: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}
+#     dockerfile: ${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}.Dockerfile
+#     tags:
+#       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+#     build_args:
+#       - TRACKARR_URL=${TRACKARR_URL_ARM64=}
+
+# depends_on:
+#   - checks
+
+# ---
+# kind: pipeline
+# name: linux-arm64-test
+
+# platform:
+#   os: linux
+#   arch: arm64
+
+# trigger:
+#   event:
+#     - push
+
+# steps:
+# - name: list-packages
+#   image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+#   pull: always
+#   commands:
+#     - apt list --installed
+# - name: test
+#   image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+#   pull: always
+#   commands:
+#     - bash update.sh checkservice
+
+# services:
+# - name: service
+#   image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+#   pull: always
+#   environment:
+#     DEBUG: yes
+
+# depends_on:
+#   - linux-arm64
+
+# ---
+# kind: pipeline
+# name: linux-arm
+
+# platform:
+#   os: linux
+#   arch: arm
+
+# trigger:
+#   event:
+#     - push
+
+# steps:
+# - name: build
+#   image: plugins/docker
+#   pull: always
+#   settings:
+#     username:
+#       from_secret: docker_username
+#     password:
+#       from_secret: docker_password
+#     repo: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}
+#     cache_from: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}
+#     dockerfile: ${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}.Dockerfile
+#     tags:
+#       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+#     build_args:
+#       - TRACKARR_URL=${TRACKARR_URL_ARM=}
+
+# depends_on:
+#   - checks
+
+# ---
+# kind: pipeline
+# name: linux-arm-test
+
+# platform:
+#   os: linux
+#   arch: arm
+
+# trigger:
+#   event:
+#     - push
+
+# steps:
+# - name: list-packages
+#   image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+#   pull: always
+#   commands:
+#     - apt list --installed
+# - name: test
+#   image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+#   pull: always
+#   commands:
+#     - bash update.sh checkservice
+
+# services:
+# - name: service
+#   image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+#   pull: always
+#   environment:
+#     DEBUG: yes
+
+# depends_on:
+#   - linux-arm
+
 ---
 kind: pipeline
 name: manifest
@@ -106,6 +240,8 @@ steps:
     template: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-OS-ARCH
     platforms:
       - linux/amd64
+      # - linux/arm
+      # - linux/arm64
 
 - name: branch
   image: plugins/manifest
@@ -120,6 +256,8 @@ steps:
     template: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-OS-ARCH
     platforms:
       - linux/amd64
+      # - linux/arm
+      # - linux/arm64
 
 - name: branch-commit
   image: plugins/manifest
@@ -134,6 +272,8 @@ steps:
     template: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-OS-ARCH
     platforms:
       - linux/amd64
+      # - linux/arm
+      # - linux/arm64
 
 - name: branch-version
   image: plugins/manifest
@@ -144,13 +284,17 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${TAG_VERSION=1.7.0}
+    target: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${TRACKARR_VERSION=1.7.0}
     template: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-OS-ARCH
     platforms:
       - linux/amd64
+      # - linux/arm
+      # - linux/arm64
 
 depends_on:
   - linux-amd64-test
+  # - linux-arm64-test
+  # - linux-arm-test
 
 ---
 kind: pipeline
@@ -168,6 +312,7 @@ steps:
   image: zenika/alpine-chrome:with-puppeteer
   pull: always
   user: root
+    VERSION_FIELD: ${TRACKARR_VERSION=1.7.0}
   commands:
     - apk add --no-cache curl@edge iputils@edge bash@edge coreutils@edge
     - bash update.sh checkservice
@@ -182,7 +327,7 @@ steps:
       from_secret: discord_id
     DISCORD_TOKEN:
       from_secret: discord_token
-    VERSION_FIELD: ${TAG_VERSION=1.7.0}
+    VERSION_FIELD: ${TRACKARR_VERSION=1.7.0}
   commands:
     - curl -fsSL https://gist.githubusercontent.com/hotio/d490b6447ddde9634475ddacbc85d8c1/raw/discord-build-notify.sh > discord-build-notify.sh
     - bash discord-build-notify.sh
