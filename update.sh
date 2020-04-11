@@ -54,9 +54,9 @@ else
     version=$(echo "${data}" | jq -r '.name' | sed s/^v//g)
     [[ -z ${version} ]] && exit 1
     [[ ${version} == null ]] && exit 0
-    url_amd64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_amd64")).url')
-    #url_arm=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm")).url')
-    #url_arm64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm64")).url')
+    url_amd64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_amd64.tar.gz")).url')
+    url_arm=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm.tar.gz")).url')
+    url_arm64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm64.tar.gz")).url')
     sed -i "s/{TRACKARR_VERSION=[^}]*}/{TRACKARR_VERSION=${version}}/g" .drone.yml
     sed -i "s#{TRACKARR_URL_AMD64=[^}]*}#{TRACKARR_URL_AMD64=${url_amd64}}#g" .drone.yml
     sed -i "s#{TRACKARR_URL_ARM=[^}]*}#{TRACKARR_URL_ARM=${url_arm}}#g" .drone.yml
