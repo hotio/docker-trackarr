@@ -6,7 +6,7 @@ ARG TRACKARR_VERSION
 
 RUN git clone -n https://gitlab.com/cloudb0x/trackarr.git /trackarr && cd /trackarr && \
     echo ${TRACKARR_VERSION} && \
-    git checkout ${TRACKARR_VERSION} -b hotio && \
+    git checkout ${TRACKARR_VERSION} && \
     ls -l /trackarr && \
     go get github.com/GeertJohan/go.rice/rice && \
     ls -l /trackarr && \
