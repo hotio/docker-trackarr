@@ -1,16 +1,18 @@
 FROM golang:buster as builder
-ARG BINARY=trackarr
+
 ARG DEBIAN_FRONTEND="noninteractive"
+RUN apt update && apt install -y --no-install-recommends --no-install-suggests yarnpkg
+
+ARG BINARY=trackarr
 RUN mkdir -p /${BINARY}
 WORKDIR /${BINARY}
 
 ARG TRACKARR_VERSION
 
-RUN apt update && apt install -y --no-install-recommends --no-install-suggests yarnpkg && \
-    git clone -n https://gitlab.com/cloudb0x/trackarr.git . && \
+RUN git clone -n https://gitlab.com/cloudb0x/trackarr.git . && \
     git checkout ${TRACKARR_VERSION} -b hotio && \
     go get github.com/GeertJohan/go.rice/rice && \
-    make build
+    make
 
 FROM hotio/base@sha256:f1629f6864be54d0d4ed469bbc5fc20f8f7a92121fbc536368c9279e262065d1
 
