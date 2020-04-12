@@ -19,7 +19,7 @@ ARG DEBIAN_FRONTEND="noninteractive"
 EXPOSE 7337
 
 # install trackarr
-COPY --from=builder /trackarr/dist/trackarr_linux_arm64/trackarr /${APP_DIR}/trackarr
-RUN chmod -R u=rwX,go=rX "${APP_DIR}" && chmod 755 "${APP_DIR}/trackarr"
+COPY --from=builder /trackarr/dist/trackarr_linux_arm64/trackarr ${APP_DIR}/trackarr
+RUN chmod 755 "${APP_DIR}/trackarr"
 
 COPY root/ /
