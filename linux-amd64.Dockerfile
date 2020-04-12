@@ -11,7 +11,7 @@ RUN git clone -n https://gitlab.com/cloudb0x/trackarr.git /trackarr && cd /track
     go get github.com/GeertJohan/go.rice/rice && \
     make vendor && \
     make TIMESTAMP=$(date -u --date=@$(git show -s --format=%ct ${TRACKARR_VERSION}) +%s) build
-RUN readelf -x .note.go.buildid /trackarr/dist/trackarr_linux_amd64/trackarr
+
 FROM hotio/base@sha256:75b16518487eb5cf1b65f55132938dbee7f954d82b8c13d4b0175780ada14ff7
 
 ARG DEBIAN_FRONTEND="noninteractive"
