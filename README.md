@@ -53,7 +53,3 @@ echo "Hello, this is me, your script."
 ## Troubleshooting a problem
 
 By default all output is redirected to `/dev/null`, so you won't see anything from the application when using `docker logs`. Most applications write everything to a log file too. If you do want to see this output with `docker logs`, you can use `-e DEBUG="yes"` to enable this.
-
-## First time installation
-
-On first time start a basic config is dumped, after that Trackarr will keep starting and closing down until you've installed a proper configuration with enabled trackers. See the upstream project's wiki for more info.
