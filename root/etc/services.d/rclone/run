@@ -5,7 +5,7 @@ umask "${UMASK}"
 
 redirect_cmd() {
     if [[ "${DEBUG}" == "yes" ]]; then
-        "$@" -vv
+        "$@"
     else
         "$@" > /dev/null 2>&1
     fi
