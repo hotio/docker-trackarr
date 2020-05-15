@@ -41,7 +41,7 @@ steps:
     tags:
       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
     build_args:
-      - TRACKARR_VERSION=${TRACKARR_VERSION=1c054b9553c79ca51532aa272f9c038d3e38f90b}
+      - TRACKARR_VERSION=${TRACKARR_VERSION=75b4466daa44f5eca22a127b9024496a5a6554dc}
 
 depends_on:
   - checks
@@ -107,7 +107,7 @@ steps:
     tags:
       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
     build_args:
-      - TRACKARR_VERSION=${TRACKARR_VERSION=1c054b9553c79ca51532aa272f9c038d3e38f90b}
+      - TRACKARR_VERSION=${TRACKARR_VERSION=75b4466daa44f5eca22a127b9024496a5a6554dc}
 
 depends_on:
   - checks
@@ -173,7 +173,7 @@ steps:
     tags:
       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
     build_args:
-      - TRACKARR_VERSION=${TRACKARR_VERSION=1c054b9553c79ca51532aa272f9c038d3e38f90b}
+      - TRACKARR_VERSION=${TRACKARR_VERSION=75b4466daa44f5eca22a127b9024496a5a6554dc}
 
 depends_on:
   - checks
@@ -284,7 +284,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${TRACKARR_VERSION=1c054b9553c79ca51532aa272f9c038d3e38f90b}
+    target: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${TRACKARR_VERSION=75b4466daa44f5eca22a127b9024496a5a6554dc}
     template: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-OS-ARCH
     platforms:
       - linux/amd64
@@ -313,7 +313,7 @@ steps:
   pull: always
   user: root
   environment:
-    VERSION_FIELD: ${TRACKARR_VERSION=1c054b9553c79ca51532aa272f9c038d3e38f90b}
+    VERSION_FIELD: ${TRACKARR_VERSION=75b4466daa44f5eca22a127b9024496a5a6554dc}
   commands:
     - apk add --no-cache curl iputils bash coreutils
     - bash update.sh checkservice
@@ -328,7 +328,7 @@ steps:
       from_secret: discord_id
     DISCORD_TOKEN:
       from_secret: discord_token
-    VERSION_FIELD: ${TRACKARR_VERSION=1c054b9553c79ca51532aa272f9c038d3e38f90b}
+    VERSION_FIELD: ${TRACKARR_VERSION=75b4466daa44f5eca22a127b9024496a5a6554dc}
   commands:
     - curl -fsSL https://gist.githubusercontent.com/hotio/d490b6447ddde9634475ddacbc85d8c1/raw/discord-build-notify.sh > discord-build-notify.sh
     - bash discord-build-notify.sh
