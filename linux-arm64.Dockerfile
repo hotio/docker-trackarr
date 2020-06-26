@@ -1,4 +1,4 @@
-FROM alpine:3.12 as builder
+FROM golang:alpine as builder
 
 RUN apk add --no-cache make git yarn
 
