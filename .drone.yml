@@ -41,7 +41,7 @@ steps:
     tags:
       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
     build_args:
-      - TRACKARR_URL=${TRACKARR_URL_AMD64=https://gitlab.com/cloudb0x/trackarr/uploads/00d2ec2dc2c7472d1cd4bedc9f4190f2/trackarr_v1.7.0_linux_amd64.tar.gz}
+      - TRACKARR_URL=${TRACKARR_URL_AMD64=https://gitlab.com/cloudb0x/trackarr/uploads/813c6dc3138bfb040f53bf8e45c2dae4/trackarr_v1.8.0_linux_amd64.tar.gz}
 
 depends_on:
   - checks
@@ -107,7 +107,7 @@ steps:
     tags:
       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
     build_args:
-      - TRACKARR_URL=${TRACKARR_URL_ARM64=https://gitlab.com/cloudb0x/trackarr/uploads/98feca4b16a2ee9923cf13d71b6c4f2d/trackarr_v1.7.0_linux_arm64.tar.gz}
+      - TRACKARR_URL=${TRACKARR_URL_ARM64=https://gitlab.com/cloudb0x/trackarr/uploads/b051ec7d29b6dbfe186479bc730774db/trackarr_v1.8.0_linux_arm64.tar.gz}
 
 depends_on:
   - checks
@@ -173,7 +173,7 @@ steps:
     tags:
       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
     build_args:
-      - TRACKARR_URL=${TRACKARR_URL_ARM=https://gitlab.com/cloudb0x/trackarr/uploads/4470187d652796ff0015978391fb7133/trackarr_v1.7.0_linux_arm.tar.gz}
+      - TRACKARR_URL=${TRACKARR_URL_ARM=https://gitlab.com/cloudb0x/trackarr/uploads/09911dc9c6f0d82eaf9675176092e35c/trackarr_v1.8.0_linux_arm.tar.gz}
 
 depends_on:
   - checks
@@ -284,7 +284,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${TRACKARR_VERSION=1.7.0}
+    target: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${TRACKARR_VERSION=1.8.0}
     template: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-OS-ARCH
     platforms:
       - linux/amd64
@@ -313,7 +313,7 @@ steps:
   pull: always
   user: root
   environment:
-    VERSION_FIELD: ${TRACKARR_VERSION=1.7.0}
+    VERSION_FIELD: ${TRACKARR_VERSION=1.8.0}
   commands:
     - apk add --no-cache curl iputils bash coreutils
     - bash update.sh checkservice
@@ -328,7 +328,7 @@ steps:
       from_secret: discord_id
     DISCORD_TOKEN:
       from_secret: discord_token
-    VERSION_FIELD: ${TRACKARR_VERSION=1.7.0}
+    VERSION_FIELD: ${TRACKARR_VERSION=1.8.0}
   commands:
     - curl -fsSL https://gist.githubusercontent.com/hotio/d490b6447ddde9634475ddacbc85d8c1/raw/discord-build-notify.sh > discord-build-notify.sh
     - bash discord-build-notify.sh
