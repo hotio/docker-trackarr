@@ -10,7 +10,7 @@ RUN git clone -n https://gitlab.com/cloudb0x/trackarr.git /trackarr && cd /track
     make vendor && \
     make TIMESTAMP=$(date -u --date=@$(git show -s --format=%ct ${TRACKARR_VERSION}) +%s) build
 
-FROM hotio/base@sha256:446dc3af8d33da7fb194ac1a5170f27c76fefa89067023a1cab73463edb925d8
+FROM hotio/base@sha256:4e4d9fc97ed14e8c66adef921f3b55186be80856d8d427fbda5fb447d700e226
 
 EXPOSE 7337
 
