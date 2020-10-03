@@ -1,5 +1,3 @@
-# trackarr
-
 [<img src="https://hotio.dev/img/trackarr.png" alt="logo" height="130" width="130">](https://gitlab.com/cloudb0x/trackarr)
 
 ![Base](https://img.shields.io/badge/base-alpine-blue)
