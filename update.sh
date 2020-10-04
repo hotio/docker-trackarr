@@ -36,6 +36,7 @@ else
     url_arm=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm.tar.gz")).url')
     url_arm64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm64.tar.gz")).url')
     echo "VERSION=${version}" > VERSION
+    echo '{"version":"'"${version}"'"}' > VERSION.json
     echo "URL_AMD64=${url_amd64}" >> VERSION
     echo "URL_ARM=${url_arm}" >> VERSION
     echo "URL_ARM64=${url_arm64}" >> VERSION
