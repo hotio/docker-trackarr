@@ -1,6 +1,6 @@
 {
-  "version": "1.8.2",
-  "url_amd64": "",
-  "url_arm": "",
-  "url_arm64": ""
+  "version": "1.8.1",
+  "url_amd64": "https://gitlab.com/cloudb0x/trackarr/uploads/c02643dedb5dfc19fceae8ebf3c254c8/trackarr_v1.8.1_linux_amd64.tar.gz",
+  "url_arm": "https://gitlab.com/cloudb0x/trackarr/uploads/69ed86a8ef3364e12ff58b5c4bbcb4d3/trackarr_v1.8.1_linux_arm.tar.gz",
+  "url_arm64": "https://gitlab.com/cloudb0x/trackarr/uploads/2295f80b475a04686a093e8f518b2d16/trackarr_v1.8.1_linux_arm64.tar.gz"
 }
