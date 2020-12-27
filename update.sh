@@ -30,6 +30,8 @@ elif [[ ${1} == "screenshot" ]]; then
 else
     version=$(curl -fsSL https://gitlab.com/api/v4/projects/cloudb0x%2Ftrackarr/repository/commits?ref_name=develop | jq -r '.[0].id')
     [[ -z ${version} ]] && exit 1
-    echo '{"version":"'"${version}"'"}' | jq . > VERSION.json
-    echo "##[set-output name=version;]${version}"
+    old_version=$(jq -r '.version' < VERSION.json)
+    changelog=$(jq -r '.changelog' < VERSION.json)
+    [[ "${old_version}" != "${version}" ]] && changelog="https://gitlab.com/cloudb0x/trackarr/-/compare/${old_version}...${version}"
+    echo '{"version":"'"${version}"'","changelog":"'"${changelog}"'"}' | jq . > VERSION.json
 fi
