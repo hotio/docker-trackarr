@@ -35,6 +35,8 @@ else
     url_amd64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_amd64.tar.gz")).url')
     url_arm=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm.tar.gz")).url')
     url_arm64=$(echo "${data}" | jq -r '.assets.links[] | select (.name | contains("linux_arm64.tar.gz")).url')
-    echo '{"version":"'"${version}"'","url_amd64":"'"${url_amd64}"'","url_arm":"'"${url_arm}"'","url_arm64":"'"${url_arm64}"'"}' | jq . > VERSION.json
-    echo "##[set-output name=version;]${version}"
+    old_version=$(jq -r '.version' < VERSION.json)
+    changelog=$(jq -r '.changelog' < VERSION.json)
+    [[ "${old_version}" != "${version}" ]] && changelog="https://gitlab.com/cloudb0x/trackarr/-/compare/v${old_version}...v${version}"
+    echo '{"version":"'"${version}"'","url_amd64":"'"${url_amd64}"'","url_arm":"'"${url_arm}"'","url_arm64":"'"${url_arm64}"'","changelog":"'"${changelog}"'"}' | jq . > VERSION.json
 fi
