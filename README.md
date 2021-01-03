@@ -11,7 +11,7 @@
 
 Just the basics to get the container running:
 
-```shell hl_lines="4 5 6 7 8 9"
+```shell
 docker run --rm \
     --name trackarr \
     -p 7337:7337 \
@@ -24,8 +24,6 @@ docker run --rm \
     -v /<host_folder_config>:/config \
     hotio/trackarr
 ```
-
-The [highlighted](https://hotio.dev/containers/trackarr) variables are all optional, the values you see are the defaults.
 
 ## Tags
 
