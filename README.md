@@ -53,7 +53,3 @@ services:
 | `nightly`          | Every commit to develop branch | ![version](https://img.shields.io/badge/dynamic/json?color=f5f5f5&style=flat-square&label=&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fhotio%2Ftrackarr%2Fnightly%2FVERSION.json) | ![build](https://img.shields.io/github/workflow/status/hotio/trackarr/build/nightly?style=flat-square&label=) |
 
 You can also find tags that reference a commit or version number.
-
-## Configuration location
-
-Your trackarr configuration inside the container is stored in `/config/app`, to migrate from another container, you'd probably have to move your files from `/config` to `/config/app`.
