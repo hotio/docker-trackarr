@@ -1,7 +1,7 @@
 {
-  "version": "1.8.2",
-  "url_amd64": "https://gitlab.com/cloudb0x/trackarr/uploads/3495407ca9cf1297c37f0a9a0680516b/trackarr_v1.8.2_linux_amd64.tar.gz",
-  "url_arm": "https://gitlab.com/cloudb0x/trackarr/uploads/e07d9c2cc33ce1371e067945a6bd0f8f/trackarr_v1.8.2_linux_arm.tar.gz",
-  "url_arm64": "https://gitlab.com/cloudb0x/trackarr/uploads/87dfc6adf8747cfb9a086af4071d67f2/trackarr_v1.8.2_linux_arm64.tar.gz",
-  "changelog": "https://gitlab.com/cloudb0x/trackarr/-/compare/v1.8.1...v1.8.2"
+  "version": "1.8.3",
+  "url_amd64": "https://gitlab.com/cloudb0x/trackarr/uploads/609e22bc7d3ef944e30ef8e504fbc269/trackarr_v1.8.3_linux_amd64.tar.gz",
+  "url_arm": "https://gitlab.com/cloudb0x/trackarr/uploads/0cefa7295a82df9e209d33b08acc00c0/trackarr_v1.8.3_linux_arm.tar.gz",
+  "url_arm64": "https://gitlab.com/cloudb0x/trackarr/uploads/403ff7d62e6e737ef79dd00459cb7b30/trackarr_v1.8.3_linux_arm64.tar.gz",
+  "changelog": "https://gitlab.com/cloudb0x/trackarr/-/compare/v1.8.2...v1.8.3"
 }
